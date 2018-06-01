@@ -1,0 +1,167 @@
+% Установка языка документа
+\usepackage{polyglossia}
+\usepackage{ucharclasses}
+\setdefaultlanguage{russian}
+\setotherlanguages{english,greek}
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}	% Дополнительные примочки ,Ligatures={TeX},Numbers=OldStyle
+\newfontfamily{\cyrillicfont}{Tinos}
+\setmainfont{Tinos}	% Нормальные: Charis SIL, Garamond Premier Pro (работают лигатуры), Gentium Plus (нет жирного, но очень хороший), Noto Serif
+\newfontfamily{\cyrillicfontsf}{Open Sans}	% Шрифт без засечек
+\setsansfont{Open Sans}	% Шрифт без засечек
+\newfontfamily{\cyrillicfonttt}{Anonymous Pro}	% Моноширный шрифт
+\setmonofont{Anonymous Pro}	% Моноширный шрифт
+\setTransitionsForLatin{\begingroup\hyphenrules{english}}{\endgroup}	% Переносы английских слов
+\input{../_source/greek}	% Прямое начертание греческих символов
+
+% !!! Исправить левую весячую пунктуацию
+\usepackage{microtype}	% Висячая пунктуация (работает только справа, почему-то)
+
+\tolerance=400
+
+%\usepackage{indentfirst}	% Задаёт отступ первому абзацу в новом разделе (в этом нет необходимости, потому что и так видно, что начался новый абзац)
+\setlength{\parindent}{19pt}
+
+\usepackage{setspace} % Интерлиньяж
+%\onehalfspacing % Интерлиньяж 1.5
+%\doublespacing % Интерлиньяж 2
+%\singlespacing % Интерлиньяж 1
+
+% Отступы от краёв страниц
+\usepackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1.5cm}
+\geometry{top=1.5cm}
+\geometry{bottom=2.2cm}
+
+\usepackage{pfnote}		% Не сквозная нумерация сносок
+
+% Настройка колонтитулов
+\usepackage{fancyhdr}
+\usepackage{nonumonpart}	% Убирает номер страницы с названием части
+\pagestyle{fancy}
+\lfoot[]{}\rfoot[]{}\rhead[]{}\lhead[]{}\chead[]{}
+\cfoot[\small\thepage]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\footskip=1cm
+
+% Математика
+\usepackage{amsfonts,amsmath,mathtools,amssymb,wasysym,marvosym,amsthm,ifsym}	% Шрифты, символы, окружения
+\usepackage{euscript}	% Новый каллиграфический шрифт ($\mathcal{A} = \EuScript{A} \neq \CMcal{A}$)
+\usepackage{mathrsfs}	% Шрифт с суперзавитушками для физики ($\mathscr{E}$)
+%\usepackage{mathtext} 	% русские буквы в формулах
+%\usepackage{t2}		% Возможность писать русский текст в формулах
+%\usepackage{ionumbers}	% Разделителем в десятичных дробях становится точка
+\usepackage{cases}		% Пояснения после уравнений системы (напр., "& x\in\Z")
+
+% Списки
+\usepackage{enumitem,iitem}
+\setlist{topsep=5pt, leftmargin=*, itemsep=0pt, partopsep=0pt}
+\setlist[1]{leftmargin=\parindent}
+\setlist[2]{leftmargin=\parindent}
+\makeatletter
+	\AddEnumerateCounter{\asbuk}{\@asbuk}{м)}
+\makeatother
+	\renewcommand{\labelitemi}{--}
+	\renewcommand{\labelenumi}{\arabic{enumi})}
+	\renewcommand{\labelenumii}{\asbuk{enumii})}
+
+\input{../_source/pictures}
+
+% Таблицы
+\usepackage{makecell}
+\usepackage{array,tabularx,tabulary,booktabs}	% Дополнительная работа с таблицами
+\usepackage{longtable}	% Длинные таблицы
+\usepackage{multirow}	% Слияние строк в таблице
+
+% Рубрикация
+\usepackage{titlesec}
+\titleformat{\part}[display]
+	{\Huge\flushright\thispagestyle{empty}}
+	{\sf\MakeUppercase{Часть}~\thepart}
+	{4pt}
+	{\bf\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{0pt}{*4}
+\titleformat{\chapter}[display]
+	{\bf\Large\centering\thispagestyle{empty}}
+	{\MakeUppercase{\chaptertitlename}~\thechapter}
+	{0pt}
+	{\titlerule[.8pt]%
+	\vspace{1pt}%
+	\titlerule%
+	\vspace{1pt}\MakeUppercase}
+\titlespacing*{\section}{0pt}{*4}{*1}
+\titleformat{\section}
+	{\bf\sf\small\raggedright\ifbool{sections_newpage}{\newpage}{}}
+	{\thesection.}
+	{4pt}
+	{\uppercase}
+\titlespacing*{\subsection}{\parindent}{*2}{*1}
+\titleformat{\subsection}[block]
+	{\bf\sf\small}
+	{\thesubsection.}
+	{4pt}
+	{}
+\titleformat{\subsubsection}[block]
+	{\bf\sf\small}
+	{}
+	{4pt}
+	{}
+\renewcommand\cleardoublepage{}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}	% Не знаю, зачем это
+
+% Оглавление
+\usepackage{shorttoc,titletoc}
+\setcounter{tocdepth}{1}
+\titlecontents{part}[1.5em]
+	{\bf\large\vspace*{1.5em}}
+	{}
+	{\hspace*{1em}}
+	{\titlerule*[4pt]{.}\contentspage}
+\titlecontents{chapter}[1.5em]
+	{\bf\small}
+	{\contentslabel{1.5em}}
+	{\hspace*{-1.5em}}
+	{\titlerule*[4pt]{.}\contentspage}
+\titlecontents{section}[4em]
+	{\small}
+	{\contentslabel{2.5em}}
+	{\hspace*{-2.5em}}
+	{\titlerule*[4pt]{.}\contentspage}
+\titlecontents{subsection}[6em]
+	{\small}
+	{\contentslabel{2.5em}}
+	{\hspace*{-2.5em}}
+	{\titlerule*[4pt]{.}\contentspage}
+\usepackage{tocbibind}	% Ссылки на библиографию, алфавитный указатель, списки таблиц и рисунков
+
+% Библиография
+%\usepackage{csquotes}
+%\usepackage[square,numbers,sort&compress]{natbib}
+%\renewcommand{\bibnumfmt}[1]{#1.\hfill} % нумерация источников в самом списке — через точку
+%\setlength{\bibsep}{0pt}
+
+\reversemarginpar		% Нормальные маргиналии
+%\marginparsep=-20pt	% Расстояние между полем и маргиналиями
+
+% Дополнительные элементы
+%\usepackage{soul}				% Декорирование текста
+\usepackage{epigraph}			% Эпиграф
+\usepackage{lastpage}			% Последняя страница
+\usepackage{ean13isbn}			% Штриховой код EAN13 с ISBN
+\usepackage[marginpar]{todo}	% Список актуальных задач
+\renewcommand{\todoname}{\large Проблемы и замечания:}
+\renewcommand{\todomark}{\pddatt}
+\newcommand{\pddatt}{\tikz[scale=1.2]{
+	\draw[red,ultra thick,scale=.89,xshift=1pt,yshift=.65pt] (0,0) -- (.3,{.6*sin(60)}) -- (.6,0) -- cycle;
+	\draw[rounded corners=.05cm,white,thick] (0,0) -- (.3,{.6*sin(60)}) -- (.6,0) -- cycle;
+	\draw[rounded corners=.05cm] (0,0) -- (.3,{.6*sin(60)}) node [scale=1.3,below=3pt] {\textrm{\textbf{!}}} -- (.6,0) -- cycle;
+}\\}
+
+%	Сквозная нумерация
+%\renewcommand{\thefigure}{\arabic{figure}}
+%\renewcommand{\theequation}{\arabic{equation}}
+
+% Компиляция
+\usepackage{checkend}	% Более подробное сообщение об ошибке при наличии незакрытого окружения
+%\mathtoolsset{showonlyrefs=true}	% Показывать ссылки напротив только тех уравнений, к которым есть ссылка (\eqref{}, просто с \ref{} не работает)

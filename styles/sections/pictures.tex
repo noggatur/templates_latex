@@ -1,0 +1,95 @@
+% Цвета
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% Рисунки и подписи
+\usepackage{filecontents,graphicx,wrapfig,pgf,pgfplots,pgfplotstable,tikz,subfigure}
+\graphicspath{{img/}{imgs/}}  % папки с картинками
+%\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+%\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage[nooneline]{caption}
+\captionsetup{margin=10pt,font=small,labelsep=period}	% Формат подрисуночной подписи\\
+\captionsetup[table]{justification=raggedleft} 
+\captionsetup[figure]{justification=centering}
+\renewcommand{\thesubfigure}{\asbuk{subfigure})}	% Одна скобка при нумирации отдельных частей картинки
+\pgfplotsset{compat=1.13}
+\usepackage[european resistors,american currents]{circuitikz}	% Электрические схемы в TikZ
+\usetikzlibrary{
+	angles,
+	arrows,
+	arrows.meta,
+	backgrounds,
+	decorations.pathmorphing,
+	decorations.pathreplacing,
+	decorations.markings,
+	calc,
+	chains,
+	fit,
+	graphs,
+	intersections,
+	patterns,
+	positioning,
+	scopes,
+	shapes,
+	shapes.misc,
+	shapes.symbols,
+	through
+}
+\tikzstyle{axes}=[]
+\tikzset{
+	thick,>=stealth',
+	font=\small,
+	block/.style={rectangle,draw,fill=black!10,thick,align=center,minimum size=.5cm,text width=1cm},
+	hl/.style={very thin,gray},
+	dhl/.style={dashed,very thin,gray},
+	gr/.style={fill=gray!20!white},
+	every label/.style={black},
+	fat dot/.style={insert path={node[circle, inner sep=1pt, fill=black]{}}},
+	empty dot/.style={insert path={node[circle, inner sep=1pt, fill=white, draw=black]{}}},
+	right angle to/.style 2 args={to path={(\tikztostart) -- (\tikztotarget) ($(\tikztotarget)!#2!(\tikztostart)$) -- ++($($(\tikztotarget)!#2!(#1)$)-(\tikztotarget)$) -- +($(\tikztotarget)-($(\tikztotarget)!#2!(\tikztostart)$)$) (\tikztotarget)}},% Дополнительный параметр указывает, в какую сторону повёрнут квадратик (нужно название узла на прямой); второй - размер квадратика
+	right angle to/.default={0,0}{0pt},
+	equal segment/.style={insert path={node[midway, sloped, yscale=.5] {$||$}}},
+	equal segment1/.style={insert path={node[midway, sloped, yscale=.5] {$|$}}},
+	equal segment3/.style={insert path={node[midway, sloped, yscale=.5] {$|||$}}},
+	bisector/.style n args={3}{insert path={ % Бисектриса
+			let
+			\p1 = ($ (#2) - (#1) $),
+			\p2 = ($ (#3) - (#1) $),
+			\p3 = ($ (#3) - (#2) $),
+			\n{a} = {.01*veclen(\x1,\y1)},
+			\n{b} = {.01*veclen(\x2,\y2)},
+			\n{c} = {.01*veclen(\x3,\y3)},
+			% взята сотая часть длин векторов, чтобы в процессе просчёта длины биссектрисы не было больших значений
+			% длина внутренней биссектрисы по теореме Стюарта + домножаем на 100
+			\n{l} = {100*sqrt(\n{a}*\n{b}*(\n{a}+\n{b}+\n{c})*(\n{a}+\n{b}-\n{c}))/(\n{a}+\n{b})}
+			in
+			(#1) -- ($(#1)!\n{l}!($($(#1)!1cm!(#2)$)!.5!($(#1)!1cm!(#3)$)$)$)}},
+	segment bisector/.style={to path={($(\tikztostart)!.5!(\tikztotarget)$) -- ($($(\tikztostart)!.5!(\tikztotarget)$)!#1!90:(\tikztotarget)$)}},	% Серединный перпендикуляр
+	% Для числовых прямых
+	p/.style={to path={(\tikztostart) -- (\tikztotarget) node[midway, above] {\tiny$+$}}},	% Плюс
+	m/.style={to path={(\tikztostart) -- (\tikztotarget) node[midway, above] {\tiny$-$}}},	% Минус
+	pd/.style={to path={(\tikztostart) -- (\tikztotarget) node[midway, below] {\tiny$+$}}},	% Плюс внизу
+	md/.style={to path={(\tikztostart) -- (\tikztotarget) node[midway, below] {\tiny$-$}}},	% Минус внизу
+	fd/.style={fat dot, insert path={node[below] {$#1$}}},	% Жирная точка
+	ed/.style={empty dot, insert path={node[below] {$#1$}}},	% Пустая точка
+	cu/.style={to path={(\tikztostart) rectangle ($(\tikztotarget)+(0,.08)$)}},	% Штриховка сверху
+	cd/.style={to path={(\tikztostart) rectangle ($(\tikztotarget)+(0,-.08)$)}}, % Штриховка снизу
+	point/.style={to path={(\tikztostart) .. controls +(90:.5) and +(90:.5) .. (\tikztotarget)}},	% Огибание от этой точки до другой точки
+	to start/.style={insert path={.. controls +(90:.35) and +(0:1) .. +(-1,.35) -- ($(start)+(0,.35)$)}},	% Огибание от этой точки до начала
+	to end/.style={insert path={.. controls +(90:.35) and +(180:1) .. +(1,.35) -- ($(end)+(0,.35)$)}}	% Огибание от этой точки до конца
+}
+
+% Цилиндрическая система координат
+\makeatletter
+\define@key{cylindricalkeys}{angle}{\def\myangle{#1}}
+\define@key{cylindricalkeys}{radius}{\def\myradius{#1}}
+\define@key{cylindricalkeys}{z}{\def\myz{#1}}
+\tikzdeclarecoordinatesystem{cylindrical}%
+{%
+	\setkeys{cylindricalkeys}{#1}%
+	\pgfpointadd
+	{\pgfpointxyz
+		{{\myradius*sin(\myangle)}}
+		{\myz}
+		{{\myradius*cos(\myangle)}}
+	}
+}

@@ -1,0 +1,77 @@
+% Установка языка документа
+\usepackage{polyglossia}
+\usepackage{ucharclasses}
+\setdefaultlanguage{russian}
+\setotherlanguages{english,greek}
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}	% Дополнительные примочки ,Ligatures={TeX},Numbers=OldStyle
+\newfontfamily{\cyrillicfont}{Tinos}
+\setmainfont{Tinos}	% Нормальные: Charis SIL, Garamond Premier Pro (работают лигатуры), Gentium Plus (нет жирного, но очень хороший), Noto Serif
+\newfontfamily{\cyrillicfontsf}{Open Sans}	% Шрифт без засечек
+\setsansfont{Open Sans}	% Шрифт без засечек
+\newfontfamily{\cyrillicfonttt}{Anonymous Pro}	% Моноширный шрифт
+\setmonofont{Anonymous Pro}	% Моноширный шрифт
+\setTransitionsForLatin{\begingroup\hyphenrules{english}}{\endgroup}	% Переносы английских слов
+\input{../_source/greek}	% Прямое начертание греческих символов
+
+\usepackage{mathptmx}
+\usepackage[scaled=0.9]{helvet}
+\usepackage{courier}
+\usefonttheme{professionalfonts}
+
+\usepackage{microtype}	% Висячая пунктуация (работает только справа, почему-то)
+
+\tolerance=400
+
+%\usepackage{indentfirst}	% Задаёт отступ первому абзацу в новом разделе (в этом нет необходимости, потому что и так видно, что начался новый абзац)
+\setlength{\parindent}{19pt}
+
+\usepackage{pfnote}		% Не сквозная нумерация сносок
+
+% Математика
+\usepackage{amsfonts,amsmath,mathtools,amssymb,wasysym,marvosym,amsthm}	% Шрифты, символы, окружения
+\usepackage{euscript}	% Новый каллиграфический шрифт ($\mathcal{A} = \EuScript{A} \neq \CMcal{A}$)
+\usepackage{mathrsfs}	% Шрифт с суперзавитушками для физики ($\mathscr{E}$)
+%\usepackage{mathtext} 	% русские буквы в формулах
+%\usepackage{t2}		% Возможность писать русский текст в формулах
+%\usepackage{ionumbers}	% Разделителем в десятичных дробях становится точка
+\usepackage{cases}		% Пояснения после уравнений системы (напр., "& x\in\Z")
+
+% Списки
+\usepackage{enumitem,iitem}
+\setlist{topsep=5pt, leftmargin=*, itemsep=0pt, partopsep=0pt}
+\setlist[1]{leftmargin=\parindent}
+\setlist[2]{leftmargin=\parindent}
+\makeatletter
+	\AddEnumerateCounter{\asbuk}{\@asbuk}{м)}
+\makeatother
+
+\input{../_source/pictures}
+
+% Таблицы
+\usepackage{makecell}
+\usepackage{array,tabularx,tabulary,booktabs}	% Дополнительная работа с таблицами
+\usepackage{longtable}	% Длинные таблицы
+\usepackage{multirow}	% Слияние строк в таблице
+
+% Дополнительные элементы
+%\usepackage{soul}				% Декорирование текста
+\usepackage{epigraph}			% Эпиграф
+\usepackage{lastpage}			% Последняя страница
+\usepackage{ean13isbn}			% Штриховой код EAN13 с ISBN
+\usepackage[marginpar]{todo}	% Список актуальных задач
+\renewcommand{\todoname}{\large Проблемы и замечания:}
+\renewcommand{\todomark}{\pddatt}
+\newcommand{\pddatt}{\tikz[scale=1.2]{
+	\draw[red,ultra thick,scale=.89,xshift=1pt,yshift=.65pt] (0,0) -- (.3,{.6*sin(60)}) -- (.6,0) -- cycle;
+	\draw[rounded corners=.05cm,white,thick] (0,0) -- (.3,{.6*sin(60)}) -- (.6,0) -- cycle;
+	\draw[rounded corners=.05cm] (0,0) -- (.3,{.6*sin(60)}) node [scale=1.3,below=3pt] {\textrm{\textbf{!}}} -- (.6,0) -- cycle;
+}\\}
+
+%	Сквозная нумерация
+%\renewcommand{\thefigure}{\arabic{figure}}
+%\renewcommand{\theequation}{\arabic{equation}}
+
+% Компиляция
+\usepackage{checkend}	% Более подробное сообщение об ошибке при наличии незакрытого окружения
+%\mathtoolsset{showonlyrefs=true}	% Показывать ссылки напротив только тех уравнений, к которым есть ссылка (\eqref{}, просто с \ref{} не работает)

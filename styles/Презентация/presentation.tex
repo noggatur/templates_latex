@@ -1,0 +1,127 @@
+\documentclass{beamer}
+
+\usepackage{etoolbox} % Логические операторы (элементы программирования в ТеХ'е)
+% Объявление булевых переменных
+\newbool{sections_newpage}
+\newbool{boldvec}
+
+% Дополнительные опции к шаблону
+%\booltrue{boldvec}	% Сделать вектора жирными символами и без стрелочек
+%\booltrue{sections_newpage}	% Каждый раздел начинать с новой страницы
+\usepackage{icomma}	% "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\renewcommand{\theequation}{\arabic{equation}}		% Сквозная нумерация формул
+
+\input{../_source/template_beamer}
+\input{../_source/designations}
+
+\author{Поляков И.\,Н.\inst{1,}\inst{2}}
+\title{Наведение остронаправленной антенны российского сегмента МКС на спутник-ретранслятор}
+\date[Дата]{}
+\institute{\inst{1}Московский физико-технический институт (государственный университет) \and \inst{2} Ракетно-космическая корпорация <<Энергия>>}
+
+\usetheme{boxes}	
+
+\begin{document}
+	\begin{frame}
+		\maketitle
+		\vspace{-1cm}
+		\scriptsize\flushright \textbf{Научный руководитель:} Богачёв А.\,В.
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Антенно-фидерное устроиство ши\-ро\-ко\-по\-лос\-ной системы связи}
+		\includegraphics[width=\textwidth]{AFU}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Цель работы --- реализовать систему связи МКС с наземным пунктом связи через СР}
+		
+		Основные задачи работы:
+		\begin{itemize}
+			\item 1) разработать сканирующий алгоритм поиска сигнала;
+			\item 
+			\item 2) разработать алгоритм поиска максимума сигнала;
+			\item 
+			\item 3) определить постоянную составляющую ошибки наведения антенны.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Постановка задачи}
+		\includegraphics[width=\textwidth]{the_problem}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Блок-схема алгоритма}
+		\includegraphics[width=\textwidth]{flowchart}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Диаграмма направленности антенны}
+		\includegraphics[width=.8\textwidth]{directional_pattern}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Локализация сигнала спиральным алгоритмом}
+		\includegraphics[width=\textwidth]{spiral}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Поиск максимума методом координатного спуска}
+		\includegraphics[width=.65\textwidth]{grad_walkdown}
+	\end{frame}
+	
+	\begin{frame}
+		\centering\Huge{\textbf{Демонстрация}}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Работоспособность алгоритма во всех квадрантах}
+		\includegraphics[width=.65\textwidth]{result_4Quadrants}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Точность нахождения максимума с течением времени работы алгоритма}
+		\includegraphics[width=\textwidth]{result_angleDifference}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Зависимость мощности сигнала от времени работы алгоритма}
+		\includegraphics[width=\textwidth]{result_power}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Азимутальная скорость в режиме сканирования}
+		\includegraphics[width=\textwidth]{result_rateOfPhi}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Зенитная скорость в режиме сканирования}
+		\includegraphics[width=\textwidth]{result_rateOfTheta}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Угловые скорости в режиме приёма данных}
+		\includegraphics[width=\textwidth]{result_rateTheor}
+	\end{frame}
+	
+	\begin{frame}\centering
+		\frametitle{Фильтрация положения максимума сигнала в~сравнеии двух альтернативных методов}
+		\includegraphics[width=\textwidth]{result_angleFilteringAverage}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Итоги работы}
+		\begin{itemize}
+			\item Алгоритм управления приводами наведения антенны реализован на языке C.
+			\item 
+			\item Результаты, отработанные на математической модели системы подтверждают работоспособность алгоритма.
+			\item 
+			\item Автоматически определяется и компенсируется как постоянная, так и случайная составляющая ошибка наведения по расчётной линии визирования на СР.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\centering\Huge{Спасибо за внимание!}
+	\end{frame}
+\end{document} 

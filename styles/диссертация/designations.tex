@@ -1,0 +1,126 @@
+% Обозначения
+\renewcommand{\AA}{\ensuremath{\mathring{\text{А}}}}
+\newcommand{\aver}[1]{\left<#1\right>}				% Среднее выборочное
+\newcommand{\bra}[1]{\ensuremath{\langle #1|}} 		% Бра-вектор
+\newcommand{\bracket}[1]{\ensuremath{\langle #1|#1\rangle}}% Квадрат модуля вектора состояния
+\newcommand{\cket}[1]{\ensuremath{#1\rangle}}  		% Кэт вектор, если умножается на бра-
+\newcommand{\celsius}{^{\circ}\mathrm{C}}			% Градус цельсия
+\newcommand{\g}{\ensuremath{^\circ}}				% Градус
+\newcommand{\const}{\ensuremath{\mathrm{const}}}	% Постоянная
+\newcommand{\Div}{\mathop{\mathrm{div}}\nolimits}	% Дивергенция
+\newcommand{\e}{\mathop{\mathrm e}\nolimits}		% Экспонента
+\renewcommand{\ge}{\geqslant}                 		% Больше или равно
+\renewcommand{\le}{\leqslant}                   	% Меньше или равно
+\newcommand{\grad}{\mathop{\mathrm{grad}}\nolimits} % Градиент
+\renewcommand{\Im}{\mathop{\mathrm{Im}}\nolimits}	% Мнимая часть
+\renewcommand{\Re}{\mathop{\mathrm{Re}}\nolimits}	% Действительная часть
+\newcommand{\Ra}{\mathop{\mathrm{Ra}}\nolimits}		% Число Релея
+\newcommand{\Gr}{\mathop{\mathrm{Gr}}\nolimits}		% Число Грассгофа
+%\newcommand{\Pr}{\mathop{\mathrm{Pr}}\nolimits}	% Число Прандтля
+\newcommand{\Oint}{\oint\limits}                	% Интеграл по контуру с правильными пределами интегрирования
+\newcommand{\rot}{\mathop{\mathrm{rot}}\nolimits} 	% Ротор
+\newcommand{\sign}{\mathop{\mathrm{sign}}\nolimits}	% Сигнум
+\newcommand{\Sum}{\sum\limits}						% Cумма с правильными пределами интегрирования
+\newcommand{\Int}{\int\limits}          			% Интеграл с правильными пределами интегрирования
+\newcommand{\IInt}{\mathop{{\int\!\!\!\int}}\limits}% Двойной интеграл с правильными пределами интегрирования
+\newcommand{\Tr}{\mathop{\mathrm{Tr}}\nolimits} 	% След матрицы
+\ifbool{boldvec}{
+	\newcommand{\veci}{\vec{i}}                			% i-орт
+	\newcommand{\vecj}{\vec{j}}                			% j-орт
+	\newcommand{\veck}{\vec{k}}                   		% k-орт
+	\renewcommand{\vec}{\textbf}						% Жирный вектор вместо стрелочки
+}{
+	\newcommand{\veci}{\vec{\imath}}                	% i-орт
+	\newcommand{\vecj}{\vec{\jmath}}                	% j-орт
+	\newcommand{\veck}{\vec{k}}                   		% k-орт
+}
+\newcommand*{\eng}[1]{{\it #1}}						% Иностранные слова
+\newcommand*{\abr}[1]{{\small #1}}					% Аббревиатуры
+\newcommand*{\s}{\ensuremath{\quad\Rightarrow\quad}}% Следовательно
+\newcommand*{\eq}{\ensuremath{\quad\Leftrightarrow\quad}}% Эквивалентно
+
+% Множества чисел
+%\newcommand{\C}{\ensuremath{\mathbb{C}}}	% Комплексные
+\newcommand{\I}{\ensuremath{\mathbb{I}}}	% Иррациональные
+\newcommand{\N}{\ensuremath{\mathbb{N}}}	% Натуральные
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}	% Рациональные
+\newcommand{\R}{\ensuremath{\mathbb{R}}}	% Вещественные
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}	% Целые
+
+% Физические величины
+\DeclareMathOperator{\E}{\mathscr{E}}	% ЭДС
+
+
+% Макросы
+\newcommand*{\ind}[1]		% Нижний индекс русскими буквами
+	{_{\text{\scriptsize #1}}}
+\newcommand*{\vind}[1]		% Верхний индекс русскими буквами
+	{^{\text{\scriptsize #1}}}
+\newcommand*{\indfrac}[2]	% Дробь русскими буквами
+	{\raisebox{2pt}{$\frac{\mbox{\small $#1$}}{\mbox{\small $#2$}}$}}
+\newcommand*{\frc}[2]		% Большая косая дробь
+	{\raisebox{2pt}{$#1$}\big/\raisebox{-3pt}{$#2$}}
+\input{../_source/letterspacing}
+\newcommand*{\tracking}[2]	% Изменение апрошей
+	{\mbox{\letterspace to #1\naturalwidth{#2}}}
+\newcommand*{\fig}[1]		% Ссылка на рисунок
+	{(см.~рис.~\ref{fig:#1})}
+\newcommand*{\ang}[2]		% Угол между двумя векторами
+	{(\lefteqn{\,\widehat{\phantom{#1\,#2}}}#1,#2)}
+\newcommand*{\partder}[2]	% Частная производная
+	{\dfrac{\partial #1}{\partial #2}}
+\newcommand*{\dpartder}[2]	% Вторая частная производная
+	{\dfrac{\partial^2 #1}{\partial #2^2}}
+\newcommand*{\hm}[1]		% Перенос знаков в формулах (по Львовскому)
+	{#1\nobreak\discretionary{}{\hbox{$\mathsurround=0pt #1$}}{}}
+
+
+% Изобретаем велосипед
+\newcommand*{\dotvec}[1]		% Производная вектора по времени
+	{\savebox{\hght}{$\vec{#1}$}\dot{\raisebox{0pt}[.8\ht\hght]{$\vec{#1}$}}}
+\newcommand*{\ddotvec}[1]	% Вторая производная вектора по времени
+	{\savebox{\hght}{$\vec{#1}$}\ddot{\raisebox{0pt}[.8\ht\hght]{$\vec{#1}$}}}
+\newcommand*{\tenz}[1]		% Тензор
+	{\boldsymbol{#1}_{ik}} %[1]{\lefteqn{\VEC{#1}}	% \overset{\rotatebox{180}{$\mathchar"017E$}}{\raisebox{-0.3pt}{\phantom{#1}}}}
+\newcommand*{\hsd}			% Нижнаяя полусфера
+	{\tikz[scale=-.16]{
+		\draw (1,0) arc [start angle=0,end angle=180,radius=1];
+		\draw (1,0) arc [start angle=0, end angle=180, x radius=1, y radius=0.3];
+		\draw (1,0) arc [start angle=0, end angle=-180, x radius=1, y radius=0.3];
+	}}
+\newcommand*{\hsu}			% Верхняя полусфера
+	{\tikz[scale=.16]{
+		\draw (1,0) arc [start angle=0,end angle=180,radius=1];
+		\draw[densely dashed] (1,0) arc [start angle=0, end angle=180, x radius=1, y radius=0.3];
+		\draw (1,0) arc [start angle=0, end angle=-180, x radius=1, y radius=0.3];
+	}}
+\newcommand*{\sptr}			% Сферический треугольник
+	{\raisebox{-.5pt}{\tikz[scale=1.2]{
+		\draw (0,0) arc [start angle=0, end angle=-60,radius=0.23];
+		\draw[xscale=-1] (0,0) arc [start angle=0, end angle=-60,radius=0.23];
+		\draw (.114,-.2) arc [start angle=60, end angle=120,radius=0.23];
+	}}}
+\newcommand{\wtftop}{		% Верхняя часть непонятного куска
+	{\hfill$\downarrow$ ЧТО С ЭТИМ ДЕЛАТЬ? $\downarrow$\hfill}
+	\vspace{.1cm}\hrule\vspace{.7cm}}
+\newcommand{\wtfbottom}{	% Нижняя часть непонятного куска
+	\vspace{.7cm}\hrule\vspace{.2cm}
+	{\hfill$\uparrow$ ЧТО С ЭТИМ ДЕЛАТЬ? $\uparrow$\hfill} }	% Пробел в конце обязателен!
+
+\newcommand{\listeqn}{\hskip0pt\vspace{-1.2\baselineskip}}	% Сдиг уравнений, находящихся в списке (без поясняющего текста) вверх
+
+% Макросы
+\newcommand{\inputTwoFiguresHere}[8]{
+	\begin{figure}[h!]
+		\hfil
+		\subfigure[#3]{#4\label{#5}}
+		\hfil\hfil
+		\subfigure[#6]{#7\label{#8}}
+		\hfil
+		\caption{#1}\label{#2}
+	\end{figure}
+}
+
+% Окружения типа "Теорема"	
+\theoremstyle{definition}
+\newtheorem{example}{Пример}[chapter]

@@ -1,0 +1,31 @@
+% Создаём кадры на каждой новой странице, а затем собираем всё в gif-ку в редакторе типа GIMP или imagemagick
+% http://www.imagemagick.org/script/index.php
+
+\documentclass[tikz, margin=.6cm]{standalone}
+\input{../_source/pictures}
+
+\begin{document}
+\foreach \x in {299,...,0}{\begin{tikzpicture}[font=\tiny]
+	\shade[inner color=black!50, shading=radial] plot file {_data/signal/data\x.csv} circle (.55);
+	
+	\draw[hl, gray!20, xstep=.1, ystep=.1] (-2.5,-2.5) grid (2.5,2.5);
+	\draw[hl, use as bounding box] (-2.5,-2.5) grid (2.5,2.5);
+	
+	\draw[->] (-2.5,0) -- (2.5,0) node[right] {$\varphi,^\circ$};
+	\draw[->] (0,-2.5) -- (0,2.5) node[above] {$\theta,^\circ$};
+	
+	\draw (0,0) node[fill=white, inner sep=2pt, below left=.1] {$0$};
+	
+	\draw (-2,.05) -- +(0,-.1) node[fill=white, inner sep=2pt, below] {$-2$};
+	\draw (-1,.05) -- +(0,-.1) node[fill=white, inner sep=2pt, below] {$-1$};
+	\draw (1,.05) -- +(0,-.1) node[fill=white, inner sep=2pt, below] {$1$};
+	\draw (2,.05) -- +(0,-.1) node[fill=white, inner sep=2pt, below] {$2$};
+	
+	\draw (.05,-2) -- +(-.1,0) node[fill=white, inner sep=2pt, left] {$-2$};
+	\draw (.05,-1) -- +(-.1,0) node[fill=white, inner sep=2pt, left] {$-1$};
+	\draw (.05,1) -- +(-.1,0) node[fill=white, inner sep=2pt, left] {$1$};
+	\draw (.05,2) -- +(-.1,0) node[fill=white, inner sep=2pt, left] {$2$};
+	
+	\draw[very thin, red!80!black] plot[mark options={fill=white}] file {_data/antenna/data\x.csv} [insert path={node[circle, inner sep=1pt, fill=red!80!black]{}}];
+\end{tikzpicture}}
+\end{document}

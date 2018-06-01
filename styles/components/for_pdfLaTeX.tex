@@ -1,0 +1,49 @@
+\usepackage{cmap}	% Позволяет осуществлять поиск по документу и копировать содержимое (для pdfLaTeX)
+
+% Микротипокрафика: висячая пунктуация, блигатуры, улучшенный трекинг и пр.
+\usepackage[protrusion=true,expansion=false]{microtype}
+\SetProtrusion{encoding=T2A,family=*}{
+	« = {1000,     },
+	» = {    , 1000},
+	„ = {1000,     },
+	“ = {    , 1000},
+	( = {1000,     },
+	) = {    , 1000},
+	! = {    , 1000},
+	? = {    , 1000},
+	: = {    , 1000},
+	; = {    , 1000},
+	. = {    , 1000},
+	- = {    ,  500},
+	{,}= {    , 1000}}
+
+% Прямые греческие буквы
+\usepackage{upgreek}
+\renewcommand{\alpha}{\upalpha}
+\renewcommand{\beta}{\upbeta}
+\renewcommand{\gamma}{\upgamma}
+\renewcommand{\delta}{\updelta}
+\renewcommand{\epsilon}{\upepsilon}
+\renewcommand{\varepsilon}{\upvarepsilon}
+\renewcommand{\zeta}{\upzeta}
+\renewcommand{\eta}{\upeta}
+\renewcommand{\theta}{\uptheta}
+\renewcommand{\vartheta}{\upvartheta}
+\renewcommand{\iota}{\upiota}
+\renewcommand{\kappa}{\upkappa}
+%\renewcommand{\varkappa}{\upvarkappa}
+\renewcommand{\lambda}{\uplambda}
+\renewcommand{\mu}{\upmu}
+\renewcommand{\nu}{\upnu}
+\renewcommand{\pi}{\uppi}
+%\renewcommand{\Pi}{\ensuremath{П}}
+\renewcommand{\xi}{\upxi}
+\renewcommand{\rho}{\uprho}
+\renewcommand{\sigma}{\upsigma}
+\renewcommand{\tau}{\uptau}
+\renewcommand{\upsilon}{\upupsilon}
+\renewcommand{\phi}{\upphi}
+\renewcommand{\varphi}{\upvarphi}
+\renewcommand{\chi}{\upchi}
+\renewcommand{\psi}{\uppsi}
+\renewcommand{\omega}{\upomega}

@@ -1,0 +1,47 @@
+\documentclass[a4paper,14pt]{extreport}
+\usepackage{extsizes}	% Расширенный размер шрифта
+
+\usepackage{etoolbox} % Логические операторы (элементы программирования в ТеХ'е)
+% Объявление булевых переменных
+\newbool{sections_newpage}
+\newbool{boldvec}
+
+% Дополнительные опции к шаблону
+\booltrue{boldvec}	% Сделать вектора жирными символами и без стрелочек
+%\booltrue{sections_newpage}	% Каждый раздел начинать с новой страницы
+\usepackage{icomma}	% "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\renewcommand{\theequation}{\arabic{equation}}		% Сквозная нумерация формул
+
+\newcommand{\pathtotemplate}{../../styles}
+
+\input{\pathtotemplate/template}
+\input{\pathtotemplate/commands/designations}
+
+\captionsetup{figurewithin=none, tablewithin=none}	% Сквозная нумерация рисунков и таблиц
+\setcounter{tocdepth}{2}
+
+% Гиперссылки
+\usepackage{hyperref}
+\hypersetup{
+	unicode=true,
+	pdfstartview=FitH,
+	pdftitle={Алгоритм наведения антенны на сигнал ретранслятора (\today)},
+	pdfsubject={Космонавтика},
+	pdfauthor={Поляков~И.Н.},
+	pdfcreator={Поляков~И.Н.},
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=black,
+	citecolor=black
+}
+\begin{document}
+	\input{\pathtotemplate/redefine}	% Переопределение того, что раньше не переопеределялось
+	\renewcommand{\chaptername}{Часть}
+
+	\input{_title} % титул
+	\tableofcontents
+
+	% Содержание документа
+
+	\todos
+\end{document}
